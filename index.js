@@ -1,21 +1,29 @@
-document.addEventListener('click', function(){
-    mainItem();
-})
+document.addEventListener('click', main);
 
-function mainItem(){
-    var randomNumber1 = Math.floor(Math.random() * 6 ) + 1;
-    var randomNumber2 = Math.floor(Math.random() * 6 ) + 1;
+const randomNumberBetween = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-    document.querySelector(".dice .img1").setAttribute("src", `images/dice${randomNumber1}.png`);
-    document.querySelector(".dice .img2").setAttribute("src", `images/dice${randomNumber2}.png`);
+function main(){
+    const heading = document.querySelector('h1')
+    const image1 = document.querySelector('.img1')
+    const image2 = document.querySelector('.img2')
+
+    const imgSrc = num => `images/dice${num}.png`
+
+    var randomNumber1 = randomNumberBetween(1,6)
+    var randomNumber2 = randomNumberBetween(1,6)
+
+    image1.setAttribute("src", imgSrc(randomNumber1));
+    image2.setAttribute("src", imgSrc(randomNumber2));
 
     if(randomNumber1 > randomNumber2){
-        document.querySelector("h1").textContent = "Player 1 Wins";
+        heading.textContent = "Player 1 Wins";
     }
     else if(randomNumber1 < randomNumber2){
-        document.querySelector("h1").textContent = "Player 2 Wins";
+        heading.textContent = "Player 2 Wins";
     }
     else if(randomNumber1 === randomNumber2){
-        document.querySelector("h1").textContent = "Match Draw";
+        heading.textContent = "Match Draw";
     }
 }
